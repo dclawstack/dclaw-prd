@@ -13,19 +13,24 @@
 | Agent Swarm runtime | dclaw-chat | v0.1.0 | Registry, orchestrator, 5 agents |
 | Helm chart | dclaw-chat | v0.1.0 | Deployments, services, ingress, CloudNativePG |
 | Telegram CI pipeline | dclaw-platform | — | TEST-01 passing |
-| GitHub org | dclawstack | — | 5 repos, secrets configured |
+| GitHub org | dclawstack | — | 6 repos, secrets configured |
 | Obsidian Vault | dclaw-obsidian | — | 12 folders, templates, CSS |
 | .github repo | .github | — | Reusable workflows, profile, LICENSE |
 | dclaw-enterprise repo | dclaw-enterprise | — | White-label build scripts |
+| Agent Swarm backbone | dclaw-platform | — | AGENT_SWARM.md, 7 agent prompts |
+| DPanel scaffold | dclaw-platform | — | Next.js 16 app on Vercel |
+| dpanel-api | dclaw-platform | — | Go service, ConfigMap reader, Dockerfile |
 
 ### ⏳ In Progress
 
 | Component | Owner | Blockers | ETA |
 |-----------|-------|----------|-----|
-| DPanel 9-dot launcher | frontend-agent | None | 2026-05-07 |
-| Frontend API integration | frontend-agent | Waiting for backend API | 2026-05-06 |
-| CloudNativePG types in operator | devops-agent | Needs cnpg import | 2026-05-10 |
-| DPanel registration logic | backend-agent | Needs DPanel API spec | 2026-05-08 |
+| DPanel 9-dot launcher | shell-agent | None | 2026-05-07 |
+| Frontend API integration | shell-agent | Waiting for backend API | 2026-05-06 |
+| CloudNativePG types in operator | shell-agent | Needs cnpg import | 2026-05-10 |
+| DPanel registration logic | shell-agent | Needs DPanel API spec | 2026-05-08 |
+| Agent swarm web chat backbone | vault-coordinator | — | 2026-05-04 |
+| DClaw Flow spec | vault-coordinator | — | 2026-05-04 |
 
 ### 🚧 Blocked
 
@@ -40,11 +45,11 @@
 
 | Task | Priority | Owner |
 |------|----------|-------|
-| FastAPI backend tests | P0 | backend-agent |
-| Frontend ↔ Backend API wiring | P0 | frontend-agent |
-| DPanel shell + app grid | P0 | frontend-agent |
-| CloudNativePG Cluster CR in operator | P0 | devops-agent |
-| DClaw Flow MVP | P1 | TBD |
+| FastAPI backend tests | P0 | shell-agent |
+| Frontend ↔ Backend API wiring | P0 | shell-agent |
+| DPanel shell + app grid | P0 | shell-agent |
+| CloudNativePG Cluster CR in operator | P0 | shell-agent |
+| DClaw Flow MVP | P1 | shell-agent |
 | DClaw RAG MVP | P1 | TBD |
 | Voice wake word prototype | P2 | TBD |
 | Desktop auto-updater | P2 | TBD |
@@ -63,13 +68,13 @@
 
 | Metric | Value |
 |--------|-------|
-| Total commits | ~30 |
-| Lines of code | ~15,000 |
-| Active agents | 2 (Build Agent + Vault Coordinator) |
-| Token burn (May) | ~200,000 / 5,000,000 |
+| Total commits | ~35 |
+| Lines of code | ~18,000 |
+| Active agents | 2 (Shell Agent + Vault Coordinator) |
+| Token burn (May) | ~250,000 / 5,000,000 |
 | Products shipped | 1 (Chat v0.1.0) |
 | CI pipelines | 3 (TEST-01, build-unsigned, build-backend) |
 
 ---
 
-*Updated: 2026-05-04 by Build Agent*
+*Updated: 2026-05-04 by Vault Coordinator*
