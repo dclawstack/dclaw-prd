@@ -29,7 +29,7 @@
 | Frontend API integration | shell-agent | Waiting for backend API | 2026-05-06 |
 | CloudNativePG types in operator | shell-agent | Needs cnpg import | 2026-05-10 |
 | DPanel registration logic | shell-agent | Needs DPanel API spec | 2026-05-08 |
-| DPanel footer year display | shell-agent | None | 2026-05-05 |
+| DPanel footer year update | shell-agent | None | 2026-05-05 |
 | Agent swarm web chat backbone | vault-coordinator | — | 2026-05-04 |
 | DClaw Flow spec | vault-coordinator | — | 2026-05-04 |
 
