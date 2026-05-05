@@ -1,7 +1,7 @@
 ---
 tags: [meta, prd, master, swarm, blueprint]
-version: 2.0
-date: 2026-05-04
+version: 2.1
+date: 2026-05-05
 ---
 
 # 📘 DClaw Master PRD
@@ -17,7 +17,7 @@ DClaw Stack is an AI-native application platform — 65+ vertical SaaS products 
 
 **Vision:** Every team runs their own AI app store. Install, use, and monetize AI agents like mobile apps.
 
-**Current Phase:** P0 Foundation (May 2026) — building the platform backbone + first 3 products.
+**Current Phase:** P0 Foundation ✅ COMPLETE (May 2026). All 4 P0 products scaffolded, DClaw-ified, and CI-green. Moving to P1 Platform + P2 Verticals.
 
 ---
 
@@ -212,9 +212,9 @@ dclaw-{app_id}/
 | Component | Repo | Version | Status | Notes |
 |-----------|------|---------|--------|-------|
 | **DClaw Chat** | [dclaw-chat](https://github.com/dclawstack/dclaw-chat) | v0.1.0 | ✅ Shipped | Next.js + FastAPI + Tauri + Helm |
-| **DClaw Flow** | [dclaw-flow](https://github.com/dclawstack/dclaw-flow) | v0.1.0 | ✅ Scaffolded | Visual workflow builder |
-| **DClaw RAG** | [dclaw-rag](https://github.com/dclawstack/dclaw-rag) | v0.1.0 | ✅ Scaffolded | Qdrant-based RAG engine |
-| **DClaw Agent** | [dclaw-agent](https://github.com/dclawstack/dclaw-agent) | v0.1.0 | ✅ Scaffolded | Agent marketplace + builder |
+| **DClaw Flow** | [dclaw-flow](https://github.com/dclawstack/dclaw-flow) | v0.1.0 | ✅ Complete | Next.js + FastAPI + Helm + CI |
+| **DClaw RAG** | [dclaw-rag](https://github.com/dclawstack/dclaw-rag) | v0.1.0 | ✅ Complete | Full-stack: Qdrant backend + Next.js frontend |
+| **DClaw Agent** | [dclaw-agent](https://github.com/dclawstack/dclaw-agent) | v0.1.0 | ✅ Complete | Next.js + FastAPI + Helm + CI |
 | **DPanel** | [dclaw-platform/dpanel](https://github.com/dclawstack/dclaw-platform) | — | 🏗️ Scaffolded | Next.js 16 app launcher |
 | **dpanel-api** | [dclaw-platform/dpanel-api](https://github.com/dclawstack/dclaw-platform) | — | 🏗️ Scaffolded | Go ConfigMap reader |
 | **DClaw Operator** | [dclaw-platform](https://github.com/dclawstack/dclaw-platform) | v0.1.0 | ✅ Reconciler | 9-step pipeline, AppId, nested resources |
@@ -284,7 +284,7 @@ P4: YC (Sep 2026)
 | 6 | create | DClaw Create | Media | Generate anything | #EC4899 | ⏳ P3 |
 | 7 | code | DClaw Code | Development | AI-native IDE | #1F2937 | ⏳ P2 |
 | 8 | agent | DClaw Agent | Platform | Build, share, sell AI agents | #8B5CF6 | ✅ P0 |
-| 9 | rag | DClaw RAG | Platform | Universal knowledge retrieval | #F59E0B | ✅ P0 |
+| 9 | rag | DClaw RAG | Platform | Universal knowledge retrieval | #F59E0B | ✅ P0 (Full-stack) |
 | 10 | legal | DClaw Legal | Legal | Contract review, case law | #6366F1 | 🔮 Future |
 | 11 | finance | DClaw Finance | Finance | Financial modeling | #10B981 | 🔮 Future |
 | 12 | sales | DClaw Sales | Sales | CRM AI, email sequences | #F59E0B | 🔮 Future |
@@ -586,11 +586,30 @@ chore(platform): bump controller-runtime to v0.18.0
 
 ### If You Are a Web Agent (kimi.com)
 1. Read this PRD fully before starting
-2. Pick an app from the product grid
+2. Pick an app from the product grid below (§7 — Next Tasks)
 3. Scaffold using the exact stack from §3
 4. Push to `github.com/dclawstack/dclaw-{app_id}`
 5. Use port from registry (§5)
 6. Include `frontend/public/dclaw-manifest.json`
+
+**CRITICAL RULES:**
+- Install ALL dependencies you import (check `npm run build` passes before pushing)
+- Create ALL files you reference (e.g., if you import `@/lib/api`, create `frontend/src/lib/api.ts`)
+- Do NOT add `@import "shadcn/tailwind.css"` — it does not exist
+- Use `npm install` (not `npm ci`) if `package-lock.json` is out of sync
+- Root `.gitignore` has `/lib/` — your `frontend/src/lib/` is safe
+
+### Next Tasks for Web Agents (Pick One)
+
+| Priority | Task | App ID | Port | What to Build |
+|----------|------|--------|------|---------------|
+| **P1** | Scaffold dclaw-med | `med` | 8092 | Healthcare: symptom analysis, clinical notes, HIPAA compliance |
+| **P1** | Scaffold dclaw-learn | `learn` | 8093 | Education: adaptive learning, quiz generation, progress tracking |
+| **P1** | Scaffold dclaw-code | `code` | 8094 | Development: AI-native IDE with Monaco Editor |
+| **P2** | Deep features for dclaw-flow | `flow` | 8088 | Add Temporal.io workflows, HTTP webhook triggers, execution history |
+| **P2** | Deep features for dclaw-agent | `agent` | 8091 | Add agent runtime engine, marketplace API, step execution logs |
+
+**How to start:** Reply with "I pick [Task]" and I'll begin scaffolding immediately.
 
 ### If You Are a Local Agent (Shell / ClaudeCoder / CodeXCoder)
 1. Clone the repo
@@ -616,6 +635,6 @@ chore(platform): bump controller-runtime to v0.18.0
 
 ---
 
-*Master PRD version: 2.0*  
-*Last updated: 2026-05-04 by Vault Coordinator*  
+*Master PRD version: 2.1*  
+*Last updated: 2026-05-05 by Vault Coordinator*  
 *Next review: When adding P2 products or changing stack*
