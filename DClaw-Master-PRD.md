@@ -1,7 +1,7 @@
 ---
 tags: [meta, prd, master, swarm, blueprint]
-version: 2.1
-date: 2026-05-05
+version: 2.2
+date: 2026-05-08
 ---
 
 # 📘 DClaw Master PRD
@@ -102,6 +102,30 @@ Every DClaw product MUST use this exact stack. No exceptions.
 - Structured logging with `slog` or `zap`
 - Table-driven tests
 - No `panic` in production code
+
+### 3.4 Docker & Container Standards (NON-NEGOTIABLE)
+
+Every `Dockerfile`, `docker-compose.yml`, and Helm manifest MUST follow these rules. Violations break VPS and unified-stack deployments.
+
+**1. Port Mapping Consistency**
+`docker-compose.yml` port mappings MUST match the container's actual listen port (from `Dockerfile` `EXPOSE` or `ENV PORT`). The host port can differ to avoid conflicts; the container port must match exactly.
+- `nginx:alpine` final stage → serves on port 80 → compose MUST map `"<host>:80"`.
+- `node` with `EXPOSE 3000` / `ENV PORT=3000` → compose MUST map `"<host>:3000"`.
+- In `dclaw-platform/docker-compose.yml` (unified stack), host ports are unique per app, but container ports must still match each app's native Dockerfile port.
+
+**2. Healthcheck Tool Availability**
+Healthcheck commands in `docker-compose.yml` MUST use binaries present in the container's base image. Do not assume `curl` is available.
+- `python:*-slim` images → use `python -c "import urllib.request; urllib.request.urlopen('http://localhost:PORT/PATH')"`.
+- `node:alpine` images → use `wget -q --spider` or install `curl` explicitly in the Dockerfile.
+- PostgreSQL images → use `pg_isready` (already present).
+
+**3. Deployment Verification Checklist**
+Before marking any app "shipped", confirm:
+- [ ] `docker compose config` passes without errors.
+- [ ] `docker compose up -d` brings all services to `healthy` state.
+- [ ] Backend health endpoint returns 200 at the mapped host port.
+- [ ] Frontend is reachable at its mapped host port.
+- [ ] Nginx reverse proxy (VPS) points to the correct host port.
 
 ---
 
@@ -635,6 +659,6 @@ chore(platform): bump controller-runtime to v0.18.0
 
 ---
 
-*Master PRD version: 2.1*  
-*Last updated: 2026-05-05 by Vault Coordinator*  
+*Master PRD version: 2.2*  
+*Last updated: 2026-05-08 by Vault Coordinator*  
 *Next review: When adding P2 products or changing stack*
